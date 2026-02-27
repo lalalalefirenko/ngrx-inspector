@@ -2,7 +2,9 @@ import { Injectable, inject } from "@angular/core";
 import { Actions } from "@ngrx/effects";
 import { Store, Action } from "@ngrx/store";
 import { withLatestFrom } from "rxjs";
-
+/*
+* This service is using for sending messages with Ngrx Actions details to window.
+*/
 @Injectable({ providedIn: "root" })
 export class NgrxInspectorBridge {
     //region DI
@@ -10,8 +12,6 @@ export class NgrxInspectorBridge {
     private readonly _actions$: Actions = inject(Actions);
 
     private readonly _store: Store = inject(Store);
-
-    private readonly _window: Window = inject(Window);
 
     //endregion
     //region Fields
@@ -22,9 +22,9 @@ export class NgrxInspectorBridge {
 
     constructor() {
         this._actions$.pipe(withLatestFrom(this._store)).subscribe(([action, state]: [Action, unknown]) => {
-            this._window.postMessage(
+            window.postMessage(
                 {
-                    source: "ngrx-actions-visualizer",
+                    source: "ngrx-inspector",
                     payload: {
                         id: this._id++,
                         type: action.type,

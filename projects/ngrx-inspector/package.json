@@ -1,0 +1,24 @@
+{
+  "name": "ngrx-inspector",
+  "version": "0.0.4",
+  "description": "Angular library that enables logging and monitoring of NgRx actions and state changes via the NgRx Inspector Chrome DevTools extension.",
+  "author": "Lev Alefirenko (https://www.linkedin.com/in/lev-alefirenko/)",
+  "peerDependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "rxjs": "^7.5.0",
+    "@ngrx/store": ">=17.0.0 <21.0.0",
+    "@ngrx/effects": ">=17.0.0 <21.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "keywords": [
+    "angular",
+    "ngrx",
+    "devtools",
+    "inspector",
+    "debugging"
+  ],
+  "sideEffects": false
+}
