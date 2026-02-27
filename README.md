@@ -1,15 +1,7 @@
 # NgRx Inspector
 
-DevTools bridge for monitoring NgRx actions and state changes.
+DevTools bridge for inspecting **NgRx actions** and **state changes** in Chrome.
 
-## Installation
+This lightweight Angular library connects your application to the **NgRx Inspector** Chrome DevTools extension, enabling real-time monitoring of dispatched actions and store state.
 
-npm install ngrx-inspector
-
-## Usage
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideNgRxInspector()
-  ]
-});
+---
