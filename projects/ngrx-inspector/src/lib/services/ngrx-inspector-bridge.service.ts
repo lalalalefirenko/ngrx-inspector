@@ -1,6 +1,6 @@
-import { Injectable, inject } from "@angular/core";
-import { Actions } from "@ngrx/effects";
-import { Store, Action } from "@ngrx/store";
+import { Injectable, inject, isDevMode } from "@angular/core";
+import { ActionsSubject, Store, Action } from "@ngrx/store";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { withLatestFrom } from "rxjs";
 /*
 * This service is using for sending messages with Ngrx Actions details to window.
@@ -9,7 +9,7 @@ import { withLatestFrom } from "rxjs";
 export class NgrxInspectorBridge {
     //region DI
 
-    private readonly _actions$: Actions = inject(Actions);
+    private readonly _actions$: ActionsSubject = inject(ActionsSubject);
 
     private readonly _store: Store = inject(Store);
 
@@ -21,7 +21,11 @@ export class NgrxInspectorBridge {
     //endregion
 
     constructor() {
-        this._actions$.pipe(withLatestFrom(this._store)).subscribe(([action, state]: [Action, unknown]) => {
+        if (!isDevMode()) return;
+
+        this._actions$.pipe(withLatestFrom(this._store), takeUntilDestroyed()).subscribe(([action, state]: [Action, unknown]) => {
+            // postMessage with "*" is intentional — the Chrome DevTools extension
+            // listens on the same page context, so no specific targetOrigin is needed.
             window.postMessage(
                 {
                     source: "ngrx-inspector",
