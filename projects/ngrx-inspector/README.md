@@ -34,3 +34,9 @@ bootstrapApplication(AppComponent, {
   providers: [provideNgRxInspector()],
 });
 ```
+
+## 👤 Author
+
+Lev Alefirenko
+
+LinkedIn: https://www.linkedin.com/in/lev-alefirenko
